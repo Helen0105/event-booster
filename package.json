@@ -1,0 +1,31 @@
+{
+  "name": "event-booster",
+  "version": "1.0.0",
+  "description": "",
+  "browserslist": "> 0.5%, last 2 versions, not dead",
+  "scripts": {
+    "dev": "npx parcel src/index.html",
+    "build": "parcel build src/index.html  --public-url /event-booster/",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Helen0105/event-booster.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Helen0105/event-booster/issues"
+  },
+  "homepage": "https://github.com/Helen0105/event-booster#readme",
+  "devDependencies": {
+    "@parcel/transformer-sass": "^2.16.4",
+    "events": "^3.3.0",
+    "parcel": "^2.16.4"
+  },
+  "dependencies": {
+    "gh-pages": "^6.3.0"
+  }
+}

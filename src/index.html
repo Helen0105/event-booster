@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./sass/main.scss">
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <a href="./index.html" class="header__link"><img src="./images/logo.svg" alt="" class="header__image"></a>
+            <h1 class="header__title">FIND BEST EVENTS
+                AROUND THE WORLD</h1>
+
+
+        <form action="" class="header__form">
+            <div class="header__icon">
+                <input type="text" class="header__input" placeholder="Start searching">
+                
+                <svg class="header__icons-start" width="12" height="12">
+                    <use href="./images/search.svg"></use>
+                </svg>
+            </div>
+            <div class="header__icon country">
+                <input type="text" class="header__input" id="countryInput" placeholder="Choose country" readonly />
+               
+                <svg class="header__icons" width="12" height="12">
+                    <use href="./images/pointer.svg"></use>
+                </svg>
+                <ul class="country-list"></ul>
+            </div>
+        </form>
+
+
+
+        </div>
+    </header>
+    <script type="module" src="./main.js"></script>
+</body>
+
+</html>
