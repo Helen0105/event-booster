@@ -175,7 +175,7 @@ body {
 
 .header__input {
   backdrop-filter: blur(10px);
-  color: #1515ff;
+  color: #fff;
   background: #ffffff1a;
   border-radius: 50px;
   outline: none;
@@ -203,9 +203,8 @@ body {
 
 .cards-container {
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  justify-content: space-between;
   gap: 56px;
-  margin: 0 13vw;
   display: flex;
 }
 
@@ -272,14 +271,12 @@ body {
 @media (width <= 768px) {
   .cards-container {
     gap: 13px;
-    margin: 0 11vw;
   }
 }
 
 @media (width <= 400px) {
   .cards-container {
     gap: 0;
-    margin: 0 7vw;
   }
 
   .icon-decor {
