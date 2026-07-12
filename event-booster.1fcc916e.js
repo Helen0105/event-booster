@@ -786,6 +786,7 @@ observer.observe(observerEl); // const soundEl = document.querySelector("#hoverS
  // });
 
 },{}],"jJ31c":[function(require,module,exports,__globalThis) {
+console.log("Chat GPT here");
 
 },{}]},["iUuJv","fILKw"], "fILKw", "parcelRequire70a8", {})
 
