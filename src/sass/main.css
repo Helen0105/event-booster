@@ -10,7 +10,13 @@ ul {
   padding: 0;
 }
 
-h1, h2, h3, h4, h5, h6, p {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
   margin: 0;
 }
 
@@ -25,7 +31,10 @@ img {
   height: auto;
 }
 
-button, input, select, textarea {
+button,
+input,
+select,
+textarea {
   border: none;
   outline: none;
   font-family: inherit;
@@ -44,23 +53,31 @@ body {
   width: 100%;
   margin-left: auto;
   margin-right: auto;
-  padding-left: 15px;
-  padding-right: 15px;
+  /* padding-left: 15px;
+  padding-right: 15px; */
+  padding-left: 13vw;
+  padding-right: 13vw;
   outline: 1px solid rgb(28, 69, 24);
 }
 @media screen and (min-width: 480px) {
   .container {
     max-width: 480px;
+    padding-left: 7vw;
+    padding-right: 7vw;
   }
 }
 @media screen and (min-width: 768px) {
   .container {
     max-width: 768px;
+    padding-left: 11vw;
+    padding-right: 11vw;
   }
 }
 @media screen and (min-width: 1280px) {
   .container {
     max-width: 1200px;
+    padding-left: 13vw;
+    padding-right: 13vw;
   }
 }
 
@@ -178,7 +195,8 @@ body {
 .header__input::placeholder {
   color: #939393;
 }
-.header__icons-start, .header__icons {
+.header__icons-start,
+.header__icons {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -219,7 +237,7 @@ body {
   /* width: 92.8%;
   height: 72.7%; */
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   border-radius: 50px 0 50px 0;
   margin-top: 13px;
   margin-right: 14px;
@@ -281,4 +299,4 @@ body {
     width: 109px;
     height: 101px;
   }
-}/*# sourceMappingURL=main.css.map */
+} /*# sourceMappingURL=main.css.map */

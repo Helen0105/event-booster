@@ -3,8 +3,8 @@
     display: flex;
     gap: 56px;
     flex-wrap: wrap;
-    margin: 0 13vw;
-    justify-content: space-evenly;
+    
+    justify-content: space-between;
     
     
 
@@ -70,8 +70,8 @@
     position: absolute;
     top: 0;
     right: 0;
-    /* width: 153px;
-    height: 143px; */
+    // width: 153px;
+    // height: 143px; 
     width: 78.9%;
     height: 45.8%;
     /* aspect-ratio: 153 / 143; */
@@ -95,9 +95,7 @@ margin-top: 20px;
         gap: 13px;
     }
 
-    .cards-container {
-        margin: 0 11vw;
-    }
+    
     
 }
 
@@ -107,9 +105,7 @@ margin-top: 20px;
         gap: 0;
     }
 
-    .cards-container {
-        margin: 0 7vw;
-    }
+    
 
     .icon-decor {
         width: 109px;
