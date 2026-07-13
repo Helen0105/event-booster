@@ -1,6 +1,6 @@
-const containerEl = document.querySelector(".cards-container");
+export const containerEl = document.querySelector(".cards-container");
 const observerEl = document.querySelector(".observer");
-const APIKey = "nJnqUpjVKnQW4ldoNLIbcXh4MnaUUVhG";
+export const APIKey = "nJnqUpjVKnQW4ldoNLIbcXh4MnaUUVhG";
 let page = 1;
 
 let search = "";
@@ -35,7 +35,7 @@ const frame = `<svg width="153" height="143" viewBox="0 0 153 143" fill="none" x
 
   const item = events
     .map((elem) => {
-      return `<li class="card-photo">
+      return `<li class="card-photo" id="${elem.id}">
         <div class="icon-decor">${frame}</div>
             <img src="${elem.images[0].url}" alt="#" class="card-img">
             <h5>${elem.name}</h5>

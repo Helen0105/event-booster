@@ -1,60 +1,54 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet" />
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/3.0.1/modern-normalize.min.css" integrity="sha512-q6WgHqiHlKyOqslT/lgBgodhd03Wp4BEqKeW6nNtlOY4quzyG3VoQKFrieaCeSnuVseNKRGpGeDU3qPmabCANg==" crossorigin="anonymous" referrerpolicy="no-referrer" />n
-    <link rel="stylesheet" href="./sass/main.scss">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/3.0.1/modern-normalize.min.css"
+        integrity="sha512-q6WgHqiHlKyOqslT/lgBgodhd03Wp4BEqKeW6nNtlOY4quzyG3VoQKFrieaCeSnuVseNKRGpGeDU3qPmabCANg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    n
+    <link rel="stylesheet" href="./sass/main.scss" />
 </head>
 
 <body>
-
-     <div class="container">
-
-     
-    <header>
-       
-            <a href="./index.html" class="header__link"><img src="./images/logo.svg" alt="" class="header__image"></a>
-            <h1 class="header__title">FIND BEST EVENTS
-                AROUND THE WORLD</h1>
-
-
-        <form action="" class="header__form">
-            <div class="header__icon">
-                <input type="text" class="header__input" placeholder="Start searching">
-                
-                <svg class="header__icons-start" width="12" height="12">
-                    <use href="./images/search.svg"></use>
-                </svg>
-            </div>
-            <div class="header__icon country">
-                <input type="text" class="header__input" id="countryInput" placeholder="Choose country" readonly />
-               
-                <svg class="header__icons" width="12" height="12">
-                    <use href="./images/pointer.svg"></use>
-                </svg>
-                <ul class="country-list"></ul>
-            </div>
-        </form>
-
-
-
-        
-    </header>
-
-    <ul class="cards-container">
-    </ul>
-
-    <span class="footer">© 2021 | All Rights Reserved | Developed with ♥ by GoIT Students</span>
-    <div class="observer"></div>
     
+
+    <div class="container">
+        <header>
+            <a href="./index.html" class="header__link"><img src="./images/logo.svg" alt="" class="header__image" /></a>
+            <h1 class="header__title">FIND BEST EVENTS AROUND THE WORLD</h1>
+
+            <form action="" class="header__form">
+                <div class="header__icon">
+                    <input type="text" class="header__input" placeholder="Start searching" />
+
+                    <svg class="header__icons-start" width="12" height="12">
+                        <use href="./images/search.svg"></use>
+                    </svg>
+                </div>
+                <div class="header__icon country">
+                    <input type="text" class="header__input" id="countryInput" placeholder="Choose country" readonly />
+
+                    <svg class="header__icons" width="12" height="12">
+                        <use href="./images/pointer.svg"></use>
+                    </svg>
+                    <ul class="country-list"></ul>
+                </div>
+            </form>
+        </header>
+
+        <ul class="cards-container"></ul>
+
+        <span class="footer">© 2021 | All Rights Reserved | Developed with ♥ by GoIT Students</span>
+        <div class="observer"></div>
     </div>
     <script type="module" src="./main.js"></script>
 </body>
