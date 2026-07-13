@@ -27,10 +27,16 @@ async function renderCards() {
   const events = data._embedded.events;
   console.log(events);
 
+const frame = `<svg width="153" height="143" viewBox="0 0 153 143" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M50 0.5H152.5V93C152.5 120.338 130.338 142.5 103 142.5H0.5V50C0.5 22.6619 22.6619 0.5 50 0.5Z" stroke="#DC56C5" stroke-opacity="0.3"/>
+</svg>`
+
+{/* <img src="./images/frame.svg" alt="icon" class="icon-decor"> */}
+
   const item = events
     .map((elem) => {
       return `<li class="card-photo">
-        <img src="./images/frame.svg" alt="icon" class="icon-decor">
+        <div class="icon-decor">${frame}</div>
             <img src="${elem.images[0].url}" alt="#" class="card-img">
             <h5>${elem.name}</h5>
             <h6>${elem.dates.start.localDate}</h6>
