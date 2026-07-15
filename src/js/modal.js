@@ -58,9 +58,9 @@ containerEl.addEventListener("click", async (e) => {
                 <li>
                     <h6>PRICES</h6>
                     <p>#</p>
-                    <a href="#"></a>
+                    <a href="#">BUY TICKETS</a>
                     <p>#</p>
-                    <a href="#"></a>
+                    <a href="#">BUY TICKETS</a>
                 </li>
             </ul>
         </div>
@@ -69,6 +69,6 @@ containerEl.addEventListener("click", async (e) => {
     </div>
 `);
 
-    instance.show();
+    instance.show(); 
   }
 });
