@@ -872,9 +872,9 @@ async function getEventById(id) {
                 <li>
                     <h6>PRICES</h6>
                     <p>#</p>
-                    <a href="#"></a>
+                    <a href="#">BUY TICKETS</a>
                     <p>#</p>
-                    <a href="#"></a>
+                    <a href="#">BUY TICKETS</a>
                 </li>
             </ul>
         </div>
