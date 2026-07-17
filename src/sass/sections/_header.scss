@@ -5,6 +5,7 @@
 
 
 .header {
+background-image: url(../images/background.png);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -106,7 +107,7 @@ max-width: 250px;
 
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
-    color: #1515ff; 
+    color: rgba(255, 255, 255, 0.1); 
     outline: none;
     transition: 0.3s;
     display: block;
