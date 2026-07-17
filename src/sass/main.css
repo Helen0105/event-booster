@@ -71,6 +71,7 @@ body {
 }
 
 .header {
+  background-image: url(../images/background.png);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -293,10 +294,13 @@ body {
   height: fit-content;
   border-radius: 300px 0 300px 0;
   background-color: #fff2fd;
-  padding: 62px 0;
+  padding: 62px 3%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 45px;
+  max-width: 942px;
+  top: 201px;
 }
 
 .modal-profile-img {
@@ -316,6 +320,7 @@ body {
 
 .modal-inside {
   display: flex;
+  justify-content: space-evenly;
 }
 
 .modal-window h6 {
@@ -327,17 +332,27 @@ body {
 .modal-window p {
   color: black;
   font-weight: 400;
-  font-size: 16px;
+  font-size: 18px;
 }
 
 .modal-window li {
-  gap: 5px;
+  gap: 7px;
   display: flex;
   flex-direction: column;
 }
 
+.modal-window a {
+  width: 145px;
+  height: 40px;
+  border-radius: 5px;
+  background-color: #4C00FE;
+  color: white;
+  font-weight: 500;
+  font-size: 16px;
+}
+
 .modal-window ul {
-  gap: 10px;
+  gap: 20px;
   display: flex;
   flex-direction: column;
 }

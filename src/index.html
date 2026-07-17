@@ -14,15 +14,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/3.0.1/modern-normalize.min.css"
         integrity="sha512-q6WgHqiHlKyOqslT/lgBgodhd03Wp4BEqKeW6nNtlOY4quzyG3VoQKFrieaCeSnuVseNKRGpGeDU3qPmabCANg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    n
     <link rel="stylesheet" href="./sass/main.scss" />
 </head>
 
 <body>
-    
 
-    <div class="container">
-        <header>
+
+    <header class="header">
+
+        <div class="container">
             <a href="./index.html" class="header__link"><img src="./images/logo.svg" alt="" class="header__image" /></a>
             <h1 class="header__title">FIND BEST EVENTS AROUND THE WORLD</h1>
 
@@ -43,13 +43,28 @@
                     <ul class="country-list"></ul>
                 </div>
             </form>
-        </header>
+        </div>
+    </header>
+    <main>
+        <section class="card">
+            <div class="container">
+                <ul class="cards-container"></ul>
+                <div class="observer"></div>
+            </div>
+        </section>
 
-        <ul class="cards-container"></ul>
 
-        <span class="footer">© 2021 | All Rights Reserved | Developed with ♥ by GoIT Students</span>
-        <div class="observer"></div>
-    </div>
+
+    </main>
+    <footer class="footerr">
+        <div class="container">
+            <span class="footer">© 2021 | All Rights Reserved | Developed with ♥ by GoIT Students</span>
+        </div>
+    </footer>
+
+
+
+
     <script type="module" src="./main.js"></script>
 </body>
 

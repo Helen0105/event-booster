@@ -13,12 +13,12 @@
 
 
 
-@use 'base/variables';
-@use 'base/reset';
-@use 'base/common';
-@use 'base/container';
+@use './base/variables';
+@use './base/reset';
+@use './base/common';
+@use './base/container';
 
-@use 'sections/header';
-@use 'sections/events';
-@use 'sections/footer';
-@use 'sections/modal';
+@use './sections/header';
+@use './sections/events';
+@use './sections/footer';
+@use './sections/modal';
