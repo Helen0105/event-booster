@@ -1,6 +1,8 @@
 import { APIKey, containerEl, renderCards } from "./events";
 
 const countries = [
+     {name: 'Australia', code: 'AU'},
+     {name: 'Brazil', code: 'BR'}, 
      {name: 'United States', code: 'US'},
      {name: 'Germany', code: 'DE'}, 
      {name: 'Great Britain', code: 'GB'}, 
@@ -9,8 +11,6 @@ const countries = [
      {name: 'Spain', code: 'ES'}, 
      {name: 'France', code: 'FR'},
      {name: 'Netherlands', code: 'NL'}, 
-     {name: 'Australia', code: 'AU'}, 
-     {name: 'Brazil', code: 'BR'},
     ];
 
 
@@ -55,14 +55,14 @@ fetchEventsByCountry(countryCode);
 
 
     function fetchEventsByCountry(code){
-        console.log("1. Функция вызванa для страны:", code);
+        console.log("1. Функція викликана для країни:", code);
         const url = `https://app.ticketmaster.com/discovery/v2/events.json?apikey=${APIKey}&countryCode=${code}`;
 fetch(url)
     .then((response) => response.json())
     .then((data) => {
-console.log("2. Ответ от API:", data); // Check 2
+console.log("2. Відповідь від API:", data); // Check 2
       const events = data._embedded ? data._embedded.events : [];
-console.log("3. Найденные события:", events); // Check 3
+console.log("3. Знайдені події:", events); // Check 3
 containerEl.innerHTML = "";
       renderCards(events); 
     })
