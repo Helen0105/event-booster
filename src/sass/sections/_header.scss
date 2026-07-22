@@ -121,8 +121,7 @@ max-width: 250px;
 
 
 
-  // hello. today is july 12
-  // hello. i'm chat gpt. how can I help you?
+
   &__icons-start,
   &__icons {
     position: absolute;
@@ -133,4 +132,21 @@ max-width: 250px;
     pointer-events: none;
     fill: #939393;
   }
+
+
+
+.country-list {
+  display: none;
+ 
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 10;
+  color: #ff0dbf;
+}
+
+
+.country-list.is-open {
+  display: block;
+}
 }

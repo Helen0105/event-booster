@@ -1,6 +1,6 @@
 export const containerEl = document.querySelector(".cards-container");
 const observerEl = document.querySelector(".observer");
-export const APIKey = "nJnqUpjVKnQW4ldoNLIbcXh4MnaUUVhG";
+export const APIKey = "qQY07Zm0RD8YKy3gsorYQLo9A9b0GEnX";
 let page = 1;
 
 let search = "";
@@ -21,7 +21,7 @@ async function getEvents(filter) {
   return data;
 }
 
-async function renderCards() {
+export async function renderCards() {
   const data = await getEvents();
   console.log(data);
   const events = data._embedded.events;
@@ -50,11 +50,14 @@ const frame = `<svg width="153" height="143" viewBox="0 0 153 143" fill="none" x
 
 renderCards();
 
-const observer = new IntersectionObserver(
+export const observer = new IntersectionObserver(
   (entry) => {
     entry.forEach(async (e) => {
-      page += 1;
+      if (e.isIntersecting){
+   page += 1;
       await renderCards();
+      }
+   
     });
   },
   {
