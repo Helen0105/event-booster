@@ -207,6 +207,19 @@ body {
   transform: translateY(-50%);
 }
 
+.header .country-list {
+  z-index: 10;
+  color: #ff0dbf;
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+}
+
+.header .country-list.is-open {
+  display: block;
+}
+
 .cards-container {
   flex-wrap: wrap;
   justify-content: space-between;

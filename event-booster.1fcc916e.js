@@ -720,15 +720,94 @@ var _modalJs = require("./js/modal.js");
 console.log('Event Booster');
 
 },{"./js/header.js":"7clXR","./js/events.js":"aKbDR","./js/modal.js":"jJ31c"}],"7clXR":[function(require,module,exports,__globalThis) {
+var _events = require("./events");
+const countries = [
+    {
+        name: 'United States',
+        code: 'US'
+    },
+    {
+        name: 'Germany',
+        code: 'DE'
+    },
+    {
+        name: 'Great Britain',
+        code: 'GB'
+    },
+    {
+        name: 'Poland',
+        code: 'PL'
+    },
+    {
+        name: 'Canada',
+        code: 'CA'
+    },
+    {
+        name: 'Spain',
+        code: 'ES'
+    },
+    {
+        name: 'France',
+        code: 'FR'
+    },
+    {
+        name: 'Netherlands',
+        code: 'NL'
+    },
+    {
+        name: 'Australia',
+        code: 'AU'
+    },
+    {
+        name: 'Brazil',
+        code: 'BR'
+    }
+];
+const countryInput = document.querySelector('#countryInput');
+const countryList = document.querySelector('.country-list');
+const countryArrow = document.querySelector('.header__icons');
+function renderCountryList() {
+    const markup = countries.map(({ name, code })=>{
+        return `<li class="country__item" data-code="${code}">${name}</li>`;
+    }).join('');
+    countryList.innerHTML = markup;
+}
+renderCountryList();
+function toggleDropdown() {
+    countryList.classList.toggle('is-open');
+}
+countryInput.addEventListener('click', toggleDropdown);
+countryArrow.addEventListener('click', toggleDropdown);
+countryList.addEventListener('click', (event)=>{
+    if (event.target.tagName !== "LI") return;
+    const selectedItem = event.target;
+    countryInput.value = selectedItem.textContent;
+    const countryCode = selectedItem.dataset.code;
+    countryList.classList.remove('is-open');
+    fetchEventsByCountry(countryCode);
+});
+function fetchEventsByCountry(code) {
+    console.log("1. \u0424\u0443\u043D\u043A\u0446\u0438\u044F \u0432\u044B\u0437\u0432\u0430\u043Da \u0434\u043B\u044F \u0441\u0442\u0440\u0430\u043D\u044B:", code);
+    const url = `https://app.ticketmaster.com/discovery/v2/events.json?apikey=${(0, _events.APIKey)}&countryCode=${code}`;
+    fetch(url).then((response)=>response.json()).then((data)=>{
+        console.log("2. \u041E\u0442\u0432\u0435\u0442 \u043E\u0442 API:", data); // Check 2
+        const events = data._embedded ? data._embedded.events : [];
+        console.log("3. \u041D\u0430\u0439\u0434\u0435\u043D\u043D\u044B\u0435 \u0441\u043E\u0431\u044B\u0442\u0438\u044F:", events); // Check 3
+        (0, _events.containerEl).innerHTML = "";
+        (0, _events.renderCards)(events);
+    }).catch((error)=>console.log("\u043F\u043E\u043C\u0438\u043B\u043A\u0430\u0430\u0430\u0430\u0430\u0430", error));
+}
 
-},{}],"aKbDR":[function(require,module,exports,__globalThis) {
+},{"./events":"aKbDR"}],"aKbDR":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "containerEl", ()=>containerEl);
 parcelHelpers.export(exports, "APIKey", ()=>APIKey);
+parcelHelpers.export(exports, "renderCards", ()=>renderCards);
+parcelHelpers.export(exports, "observer", ()=>observer);
 const containerEl = document.querySelector(".cards-container");
 const observerEl = document.querySelector(".observer");
-const APIKey = "nJnqUpjVKnQW4ldoNLIbcXh4MnaUUVhG";
+const APIKey = "qQY07Zm0RD8YKy3gsorYQLo9A9b0GEnX";
 let page = 1;
 let search = "";
 // fetch(`https://app.ticketmaster.com/discovery/v2/events.json?apikey=${APIKey}`).then((res) => res.json())
@@ -764,8 +843,10 @@ async function renderCards() {
 renderCards();
 const observer = new IntersectionObserver((entry)=>{
     entry.forEach(async (e)=>{
-        page += 1;
-        await renderCards();
+        if (e.isIntersecting) {
+            page += 1;
+            await renderCards();
+        }
     });
 }, {
     rootMargin: "200px"
