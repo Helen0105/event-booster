@@ -193,6 +193,17 @@ body {
   pointer-events: none;
   fill: #939393;
 }
+.header .country-list {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 10;
+  color: #ff0dbf;
+}
+.header .country-list.is-open {
+  display: block;
+}
 
 .cards-container {
   display: flex;
