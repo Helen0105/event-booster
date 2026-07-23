@@ -723,6 +723,14 @@ console.log('Event Booster');
 var _events = require("./events");
 const countries = [
     {
+        name: 'Australia',
+        code: 'AU'
+    },
+    {
+        name: 'Brazil',
+        code: 'BR'
+    },
+    {
         name: 'United States',
         code: 'US'
     },
@@ -753,14 +761,6 @@ const countries = [
     {
         name: 'Netherlands',
         code: 'NL'
-    },
-    {
-        name: 'Australia',
-        code: 'AU'
-    },
-    {
-        name: 'Brazil',
-        code: 'BR'
     }
 ];
 const countryInput = document.querySelector('#countryInput');
@@ -778,22 +778,23 @@ function toggleDropdown() {
 }
 countryInput.addEventListener('click', toggleDropdown);
 countryArrow.addEventListener('click', toggleDropdown);
-countryList.addEventListener('click', (event)=>{
+countryList.addEventListener('click', async (event)=>{
     if (event.target.tagName !== "LI") return;
     const selectedItem = event.target;
     countryInput.value = selectedItem.textContent;
     const countryCode = selectedItem.dataset.code;
     countryList.classList.remove('is-open');
-    fetchEventsByCountry(countryCode);
+    (0, _events.setFilters)(countryCode);
+    await (0, _events.renderCards)();
 });
 function fetchEventsByCountry(code) {
-    console.log("1. \u0424\u0443\u043D\u043A\u0446\u0438\u044F \u0432\u044B\u0437\u0432\u0430\u043Da \u0434\u043B\u044F \u0441\u0442\u0440\u0430\u043D\u044B:", code);
-    const url = `https://app.ticketmaster.com/discovery/v2/events.json?apikey=${(0, _events.APIKey)}&countryCode=${code}`;
+    console.log("1. \u0424\u0443\u043D\u043A\u0446\u0456\u044F \u0432\u0438\u043A\u043B\u0438\u043A\u0430\u043D\u0430 \u0434\u043B\u044F \u043A\u0440\u0430\u0457\u043D\u0438:", code);
+    const url = `https://app.ticketmaster.com/discovery/v2/events.json?apikey=${APIKey}&countryCode=${code}`;
     fetch(url).then((response)=>response.json()).then((data)=>{
-        console.log("2. \u041E\u0442\u0432\u0435\u0442 \u043E\u0442 API:", data); // Check 2
+        console.log("2. \u0412\u0456\u0434\u043F\u043E\u0432\u0456\u0434\u044C \u0432\u0456\u0434 API:", data); // Check 2
         const events = data._embedded ? data._embedded.events : [];
-        console.log("3. \u041D\u0430\u0439\u0434\u0435\u043D\u043D\u044B\u0435 \u0441\u043E\u0431\u044B\u0442\u0438\u044F:", events); // Check 3
-        (0, _events.containerEl).innerHTML = "";
+        console.log("3. \u0417\u043D\u0430\u0439\u0434\u0435\u043D\u0456 \u043F\u043E\u0434\u0456\u0457:", events); // Check 3
+        containerEl.innerHTML = "";
         (0, _events.renderCards)(events);
     }).catch((error)=>console.log("\u043F\u043E\u043C\u0438\u043B\u043A\u0430\u0430\u0430\u0430\u0430\u0430", error));
 }
@@ -803,49 +804,100 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "containerEl", ()=>containerEl);
 parcelHelpers.export(exports, "APIKey", ()=>APIKey);
+// fetch(`https://app.ticketmaster.com/discovery/v2/events.json?apikey=${APIKey}`).then((res) => res.json())
+// .then((res) => console.log(res._embedded)
+// )
+parcelHelpers.export(exports, "setFilters", ()=>setFilters);
+// export async function renderCards() {
+//   const data = await getEvents();
+//   console.log(data);
+//   const events = data._embedded.events;
+//   console.log(events);
+//   const frame = `<svg width="153" height="143" viewBox="0 0 153 143" fill="none" xmlns="http://www.w3.org/2000/svg">
+// <path d="M50 0.5H152.5V93C152.5 120.338 130.338 142.5 103 142.5H0.5V50C0.5 22.6619 22.6619 0.5 50 0.5Z" stroke="#DC56C5" stroke-opacity="0.3"/>
+// </svg>`;
+//   {
+//     /* <img src="./images/frame.svg" alt="icon" class="icon-decor"> */
+//   }
+//   const item = events
+//     .map((elem) => {
+//       return `<li class="card-photo" id="${elem.id}">
+//         <div class="icon-decor">${frame}</div>
+//             <img src="${elem.images[0].url}" alt="#" class="card-img">
+//             <h5>${elem.name}</h5>
+//             <h6>${elem.dates.start.localDate}</h6>
+//             <p>${elem._embedded.venues[0].name}</p>
+//         </li>`;
+//     })
+//     .join("");
+//   containerEl.insertAdjacentHTML("beforeend", item);
+// }
 parcelHelpers.export(exports, "renderCards", ()=>renderCards);
 parcelHelpers.export(exports, "observer", ()=>observer);
 const containerEl = document.querySelector(".cards-container");
 const observerEl = document.querySelector(".observer");
 const APIKey = "qQY07Zm0RD8YKy3gsorYQLo9A9b0GEnX";
-let page = 1;
+let page = 0;
+let currentSearch = "";
+let currentCountryCode = "";
 let search = "";
-// fetch(`https://app.ticketmaster.com/discovery/v2/events.json?apikey=${APIKey}`).then((res) => res.json())
-// .then((res) => console.log(res._embedded)
-// )
-async function getEvents(filter) {
-    const res = await fetch(`https://app.ticketmaster.com/discovery/v2/events.json?keyword=${search}&size=12&page=${page}&apikey=${APIKey}`);
-    const data = await res.json();
-    // const events = data._embedded
-    // const events = data._embedded
-    // console.log(events);
-    return data;
+function setFilters(countryCode = "", keyword = "") {
+    currentCountryCode = countryCode;
+    currentSearch = keyword;
+    page = 0;
+    containerEl.innerHTML = "";
+}
+// async function getEvents(filter) {
+//   const res = await fetch(
+//     `https://app.ticketmaster.com/discovery/v2/events.json?keyword=${search}&size=12&page=${page}&apikey=${APIKey}`,
+//   );
+//   const data = await res.json();
+//   // const events = data._embedded
+//   // const events = data._embedded
+//   // console.log(events);
+//   return data;
+// }
+async function getEvents() {
+    let url = `https://app.ticketmaster.com/discovery/v2/events.json?size=12&page=${page}&apikey=${APIKey}`;
+    if (currentSearch) url += `&keyword=${encodeURIComponent(currentSearch)}`;
+    if (currentCountryCode) url += `&countryCode=${currentCountryCode}`;
+    try {
+        const res = await fetch(url);
+        const data = await res.json();
+        return data;
+    } catch (error) {
+        console.error("\u041F\u043E\u043C\u0438\u043B\u043A\u0430 \u043F\u0456\u0434 \u0447\u0430\u0441 \u0437\u0430\u0432\u0430\u043D\u0442\u0430\u0436\u0435\u043D\u043D\u044F \u0434\u0430\u043D\u0438\u0445:", error);
+    }
 }
 async function renderCards() {
     const data = await getEvents();
-    console.log(data);
-    const events = data._embedded.events;
-    console.log(events);
+    const events = data?._embedded?.events;
+    if (!events || events.length === 0) {
+        if (page === 0) containerEl.innerHTML = `<p class="no-results">\u{41F}\u{43E}\u{434}\u{456}\u{439} \u{43D}\u{435} \u{437}\u{43D}\u{430}\u{439}\u{434}\u{435}\u{43D}\u{43E}</p>`;
+        return;
+    }
     const frame = `<svg width="153" height="143" viewBox="0 0 153 143" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M50 0.5H152.5V93C152.5 120.338 130.338 142.5 103 142.5H0.5V50C0.5 22.6619 22.6619 0.5 50 0.5Z" stroke="#DC56C5" stroke-opacity="0.3"/>
 </svg>`;
-    const item = events.map((elem)=>{
+    const itemsMarkup = events.map((elem)=>{
+        const imageUrl = elem.images?.[0]?.url || "";
+        const date = elem.dates?.start?.localDate || "\u0414\u0430\u0442\u0430 \u043D\u0435\u0432\u0456\u0434\u043E\u043C\u0430";
+        const venue = elem._embedded?.venues?.[0]?.name || "\u041B\u043E\u043A\u0430\u0446\u0456\u044F \u043D\u0435\u0432\u0456\u0434\u043E\u043C\u0430";
         return `<li class="card-photo" id="${elem.id}">
         <div class="icon-decor">${frame}</div>
-            <img src="${elem.images[0].url}" alt="#" class="card-img">
+            <img src="${imageUrl}" alt="${elem.name}" class="card-img">
             <h5>${elem.name}</h5>
-            <h6>${elem.dates.start.localDate}</h6>
-            <p>${elem._embedded.venues[0].name}</p>
+            <h6>${date}</h6>
+            <p>${venue}</p>
         </li>`;
     }).join("");
-    containerEl.insertAdjacentHTML("beforeend", item);
+    containerEl.insertAdjacentHTML("beforeend", itemsMarkup);
 }
-renderCards();
-const observer = new IntersectionObserver((entry)=>{
-    entry.forEach(async (e)=>{
-        if (e.isIntersecting) {
-            page += 1;
+const observer = new IntersectionObserver((entries)=>{
+    entries.forEach(async (entry)=>{
+        if (entry.isIntersecting) {
             await renderCards();
+            page += 1;
         }
     });
 }, {
