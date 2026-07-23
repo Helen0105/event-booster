@@ -1,4 +1,6 @@
-import { APIKey, containerEl, renderCards } from "./events";
+
+
+import { setFilters, renderCards } from "./events";
 
 const countries = [
      {name: 'Australia', code: 'AU'},
@@ -41,14 +43,17 @@ countryList.innerHTML = markup;
     countryArrow.addEventListener('click', toggleDropdown);
 
 
-    countryList.addEventListener('click', (event) => {
+    countryList.addEventListener('click', async (event) => {
         if(event.target.tagName !== "LI") return;
         const selectedItem = event.target;
        countryInput.value = selectedItem.textContent;
 
 const countryCode = selectedItem.dataset.code;
 countryList.classList.remove('is-open');
-fetchEventsByCountry(countryCode);
+
+setFilters(countryCode);
+  await renderCards();
+
 
     })
 
