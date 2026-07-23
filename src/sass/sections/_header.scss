@@ -16,7 +16,8 @@ background-image: url(../images/background.png);
   flex-direction: column;
   align-items: center;
   padding: 24px 20px 40px 20px;
-
+z-index: 100;
+overflow: visible !important;
   @media screen and (min-width: 786px) {
     padding: 60px 40px 50px 40px; 
   }
@@ -26,7 +27,11 @@ background-image: url(../images/background.png);
   }
 
   &__title {
-    color: #ff0dbf;
+color:  #dc56c5; 
+
+ 
+  text-shadow: 0 0 10px rgba(210, 67, 186, 0.6),
+               0 0 20px rgba(220, 86, 197, 0.3);
     font-family: Montserrat;
     font-style: normal;
     font-weight: 900;
@@ -107,7 +112,7 @@ max-width: 250px;
 
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
-    color: rgba(255, 255, 255, 0.1); 
+    color: rgba(255, 255, 255, 0.392); 
     outline: none;
     transition: 0.3s;
     display: block;
@@ -149,4 +154,88 @@ max-width: 250px;
 .country-list.is-open {
   display: block;
 }
+
+
+.header__icon.country {
+  position: relative; 
+}
+
+
+.country-list {
+
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  width: 100%;
+  max-height: 145px;
+  overflow-y: auto;  
+  z-index: 100;
+
+  background: rgba(20, 20, 20, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  border-radius: 20px;
+  border: 1px solid rgba(220, 86, 197, 0.4);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5),
+              0 0 15px rgba(220, 86, 197, 0.25);
+
+  padding: 8px 0;
+  margin: 0;
+  list-style: none;
+
+
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-12px);
+  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              visibility 0.3s;
+
+
+  &.is-open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+}
+
+
+.country__item {
+  padding: 12px 20px;
+  color: #ffffff;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s ease;
+
+
+  &:hover {
+    background-color: rgba(220, 86, 197, 0.2); 
+    color: #dc56c5;                              
+    padding-left: 26px;                    
+  }
+}
+
+
+.country-list::-webkit-scrollbar {
+  width: 5px;
+}
+
+.country-list::-webkit-scrollbar-track {
+  background: transparent;
+  margin: 8px 0;
+}
+
+.country-list::-webkit-scrollbar-thumb {
+  background: rgba(220, 86, 197, 0.5);
+  border-radius: 10px;
+}
+
+.country-list::-webkit-scrollbar-thumb:hover {
+  background: rgba(220, 86, 197, 0.9);
+}
+
 }
