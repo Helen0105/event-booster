@@ -798,6 +798,26 @@ function fetchEventsByCountry(code) {
         (0, _events.renderCards)(events);
     }).catch((error)=>console.log("\u043F\u043E\u043C\u0438\u043B\u043A\u0430\u0430\u0430\u0430\u0430\u0430", error));
 }
+const searchInput = document.querySelector('#searchInput');
+let selectedCountryCode = "";
+let searchTimeout = null;
+countryList.addEventListener('click', async (event)=>{
+    if (event.target.tagName !== "LI") return;
+    const selectedItem = event.target;
+    countryInput.value = selectedItem.textContent;
+    selectedCountryCode = selectedItem.dataset.code;
+    countryList.classList.remove('is-open');
+    (0, _events.setFilters)(selectedCountryCode, searchInput.value.trim());
+    await (0, _events.renderCards)();
+});
+searchInput.addEventListener('input', (event)=>{
+    clearTimeout(searchTimeout);
+    searchTimeout = setTimeout(async ()=>{
+        const query = event.target.value.trim();
+        (0, _events.setFilters)(selectedCountryCode, query);
+        await (0, _events.renderCards)();
+    }, 500);
+});
 
 },{"./events":"aKbDR"}],"aKbDR":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
