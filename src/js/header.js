@@ -75,3 +75,35 @@ containerEl.innerHTML = "";
 
     }
 
+
+
+    const searchInput = document.querySelector('#searchInput');
+    let selectedCountryCode = ""; 
+let searchTimeout = null;     
+countryList.addEventListener('click', async (event) => {
+    if (event.target.tagName !== "LI") return;
+    
+    const selectedItem = event.target;
+    countryInput.value = selectedItem.textContent;
+
+ 
+    selectedCountryCode = selectedItem.dataset.code; 
+    countryList.classList.remove('is-open');
+
+    setFilters(selectedCountryCode, searchInput.value.trim());
+    await renderCards();
+});
+
+
+searchInput.addEventListener('input', (event) => {
+  
+  clearTimeout(searchTimeout);
+
+
+  searchTimeout = setTimeout(async () => {
+    const query = event.target.value.trim();
+    
+    setFilters(selectedCountryCode, query);
+    await renderCards();
+  }, 500);
+});
