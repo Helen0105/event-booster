@@ -12,6 +12,11 @@
 max-width: 942px;
 top: 201px;
 position: relative;
+overflow: hidden;
+
+}
+
+.basicLightbox {
 overflow-y: auto;
 }
 
@@ -78,30 +83,50 @@ align-items: center;
 .modal-window button {
   border-radius: 5px;
   border: 1px solid #4C00FE;
-  height: 40px;
-  width: 255px;
+  height: fit-content;
+  width: 27%;
   color: #4C00FE;
   text-align: center;
+  background-color: rgba(255, 0, 0, 0);
 
 
 }
 
 @media (max-width: 768px) {
+  .modal-window button {
+   width: 27%; 
+  }
   .modal-window h6 {
     font-size: 20px;
   }
 
+  .modal-window p {
+    font-size: 16px;
+  }
+
   .modal-window {
     width: 73vw;
-    top: 60px;
+    top: 20px;
+  }
+
+  .modal-big-img {
+    width: 50%;
   }
 
   .modal-profile-img {
     width: 11.6%;
   }
+
+  .modal-inside {
+    gap: 30px;
+  }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 520px) {
+  .modal-window button {
+   width: 80%; 
+  }
+
   .modal-window {
     width: 85vw;
     border-radius: 150px 0 150px 0;

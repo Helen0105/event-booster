@@ -96,6 +96,11 @@ export async function renderCards() {
 <path d="M50 0.5H152.5V93C152.5 120.338 130.338 142.5 103 142.5H0.5V50C0.5 22.6619 22.6619 0.5 50 0.5Z" stroke="#DC56C5" stroke-opacity="0.3"/>
 </svg>`;
 
+const placeIcon = `<svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M3.5 0C1.57011 0 0 1.55933 0 3.47595C0 5.88495 3.50344 10 3.50344 10C3.50344 10 7 5.76648 7 3.47595C7 1.55933 5.42995 0 3.5 0ZM4.55602 4.49371C4.26484 4.78284 3.88245 4.92743 3.5 4.92743C3.11761 4.92743 2.7351 4.78284 2.44404 4.49371C1.86173 3.91547 1.86173 2.97455 2.44404 2.39624C2.72601 2.11609 3.10108 1.96179 3.5 1.96179C3.89892 1.96179 4.27393 2.11615 4.55602 2.39624C5.13833 2.97455 5.13833 3.91547 4.55602 4.49371Z" fill="white"/>
+</svg>
+`
+
   const itemsMarkup = events
     .map((elem) => {
       const imageUrl = elem.images?.[0]?.url || "";
@@ -107,7 +112,7 @@ export async function renderCards() {
             <img src="${imageUrl}" alt="${elem.name}" class="card-img">
             <h5>${elem.name}</h5>
             <h6>${date}</h6>
-            <p>${venue}</p>
+            <p>${placeIcon}${venue}</p>
         </li>`;
     })
     .join("");
