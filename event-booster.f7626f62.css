@@ -395,6 +395,10 @@ body {
   display: flex;
   position: relative;
   top: 201px;
+  overflow: hidden;
+}
+
+.basicLightbox {
   overflow-y: auto;
 }
 
@@ -456,28 +460,49 @@ body {
 .modal-window button {
   color: #4c00fe;
   text-align: center;
+  background-color: #f000;
   border: 1px solid #4c00fe;
   border-radius: 5px;
-  width: 255px;
-  height: 40px;
+  width: 27%;
+  height: fit-content;
 }
 
 @media (width <= 768px) {
+  .modal-window button {
+    width: 27%;
+  }
+
   .modal-window h6 {
     font-size: 20px;
   }
 
+  .modal-window p {
+    font-size: 16px;
+  }
+
   .modal-window {
     width: 73vw;
-    top: 60px;
+    top: 20px;
+  }
+
+  .modal-big-img {
+    width: 50%;
   }
 
   .modal-profile-img {
     width: 11.6%;
   }
+
+  .modal-inside {
+    gap: 30px;
+  }
 }
 
-@media (width <= 400px) {
+@media (width <= 520px) {
+  .modal-window button {
+    width: 80%;
+  }
+
   .modal-window {
     border-radius: 150px 0;
     width: 85vw;

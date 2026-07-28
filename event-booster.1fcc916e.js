@@ -899,6 +899,10 @@ async function renderCards() {
     const frame = `<svg width="153" height="143" viewBox="0 0 153 143" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M50 0.5H152.5V93C152.5 120.338 130.338 142.5 103 142.5H0.5V50C0.5 22.6619 22.6619 0.5 50 0.5Z" stroke="#DC56C5" stroke-opacity="0.3"/>
 </svg>`;
+    const placeIcon = `<svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M3.5 0C1.57011 0 0 1.55933 0 3.47595C0 5.88495 3.50344 10 3.50344 10C3.50344 10 7 5.76648 7 3.47595C7 1.55933 5.42995 0 3.5 0ZM4.55602 4.49371C4.26484 4.78284 3.88245 4.92743 3.5 4.92743C3.11761 4.92743 2.7351 4.78284 2.44404 4.49371C1.86173 3.91547 1.86173 2.97455 2.44404 2.39624C2.72601 2.11609 3.10108 1.96179 3.5 1.96179C3.89892 1.96179 4.27393 2.11615 4.55602 2.39624C5.13833 2.97455 5.13833 3.91547 4.55602 4.49371Z" fill="white"/>
+</svg>
+`;
     const itemsMarkup = events.map((elem)=>{
         const imageUrl = elem.images?.[0]?.url || "";
         const date = elem.dates?.start?.localDate || "\u0414\u0430\u0442\u0430 \u043D\u0435\u0432\u0456\u0434\u043E\u043C\u0430";
@@ -908,7 +912,7 @@ async function renderCards() {
             <img src="${imageUrl}" alt="${elem.name}" class="card-img">
             <h5>${elem.name}</h5>
             <h6>${date}</h6>
-            <p>${venue}</p>
+            <p>${placeIcon}${venue}</p>
         </li>`;
     }).join("");
     containerEl.insertAdjacentHTML("beforeend", itemsMarkup);
@@ -979,6 +983,16 @@ exports.export = function(dest, destName, get) {
 var _events = require("./events");
 var _basiclightbox = require("basiclightbox");
 var _basicLightboxMinCss = require("basiclightbox/dist/basicLightbox.min.css");
+const icon = `<svg width="29" height="20" viewBox="0 0 29 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M3.22222 0L0 0L0 19.3333H3.22222L3.22222 0Z" fill="#0E0E0E"/>
+<path d="M11.3266 0L8.10439 0L8.10439 19.3333H11.3266L11.3266 0Z" fill="#0E0E0E"/>
+<path d="M16.2088 0L12.9866 0L12.9866 19.3333H16.2088L16.2088 0Z" fill="#0E0E0E"/>
+<path d="M28.9999 0L24.2154 0L24.2154 19.3333H28.9999L28.9999 0Z" fill="#0E0E0E"/>
+<path d="M6.44449 0L4.88219 0L4.88219 19.3333H6.44449L6.44449 0Z" fill="#0E0E0E"/>
+<path d="M19.3333 0L17.771 0L17.771 19.3333H19.3333L19.3333 0Z" fill="#0E0E0E"/>
+<path d="M22.5555 0L20.9932 0L20.9932 19.3333H22.5555L22.5555 0Z" fill="#0E0E0E"/>
+</svg>
+`;
 async function getEventById(id) {
     const res = await fetch(`https://app.ticketmaster.com/discovery/v2/events.json?id=${id}&size=1&apikey=${(0, _events.APIKey)}`);
     const data = await res.json();
@@ -1024,9 +1038,9 @@ async function getEventById(id) {
                 </li>
                 <li>
                     <h6>PRICES</h6>
-                    <p>#</p>
+                    <p>${icon}#</p>
                     <a href="#">BUY TICKETS</a>
-                    <p>#</p>
+                    <p>${icon}#</p>
                     <a href="#">BUY TICKETS</a>
                 </li>
             </ul>
