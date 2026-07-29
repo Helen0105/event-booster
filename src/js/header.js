@@ -1,4 +1,22 @@
+import confetti from 'canvas-confetti';
 
+
+
+const logo = document.querySelector(".header__title")
+
+logo.addEventListener('mouseenter', () => {
+  confetti({
+    particleCount: 100,
+    spread: 70,
+    origin: {
+      x: 0.5,
+      y: 0.3,
+    },
+    colors: ['#DC56C5', '#e219c1', '#d88fcc']
+  });
+
+//   confetti();
+});
 
 import { setFilters, renderCards } from "./events";
 
