@@ -839,167 +839,7 @@ searchInput.addEventListener('input', (event)=>{
     }, 500);
 });
 
-},{"./events":"aKbDR","canvas-confetti":"6579x","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"aKbDR":[function(require,module,exports,__globalThis) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "containerEl", ()=>containerEl);
-parcelHelpers.export(exports, "APIKey", ()=>APIKey);
-// fetch(`https://app.ticketmaster.com/discovery/v2/events.json?apikey=${APIKey}`).then((res) => res.json())
-// .then((res) => console.log(res._embedded)
-// )
-parcelHelpers.export(exports, "setFilters", ()=>setFilters);
-// export async function renderCards() {
-//   const data = await getEvents();
-//   console.log(data);
-//   const events = data._embedded.events;
-//   console.log(events);
-//   const frame = `<svg width="153" height="143" viewBox="0 0 153 143" fill="none" xmlns="http://www.w3.org/2000/svg">
-// <path d="M50 0.5H152.5V93C152.5 120.338 130.338 142.5 103 142.5H0.5V50C0.5 22.6619 22.6619 0.5 50 0.5Z" stroke="#DC56C5" stroke-opacity="0.3"/>
-// </svg>`;
-//   {
-//     /* <img src="./images/frame.svg" alt="icon" class="icon-decor"> */
-//   }
-//   const item = events
-//     .map((elem) => {
-//       return `<li class="card-photo" id="${elem.id}">
-//         <div class="icon-decor">${frame}</div>
-//             <img src="${elem.images[0].url}" alt="#" class="card-img">
-//             <h5>${elem.name}</h5>
-//             <h6>${elem.dates.start.localDate}</h6>
-//             <p>${elem._embedded.venues[0].name}</p>
-//         </li>`;
-//     })
-//     .join("");
-//   containerEl.insertAdjacentHTML("beforeend", item);
-// }
-parcelHelpers.export(exports, "renderCards", ()=>renderCards);
-parcelHelpers.export(exports, "observer", ()=>observer);
-const containerEl = document.querySelector(".cards-container");
-const observerEl = document.querySelector(".observer");
-const APIKey = "qQY07Zm0RD8YKy3gsorYQLo9A9b0GEnX";
-let page = 0;
-let currentSearch = "";
-let currentCountryCode = "";
-let search = "";
-function setFilters(countryCode = "", keyword = "") {
-    currentCountryCode = countryCode;
-    currentSearch = keyword;
-    page = 0;
-    containerEl.innerHTML = "";
-}
-// async function getEvents(filter) {
-//   const res = await fetch(
-//     `https://app.ticketmaster.com/discovery/v2/events.json?keyword=${search}&size=12&page=${page}&apikey=${APIKey}`,
-//   );
-//   const data = await res.json();
-//   // const events = data._embedded
-//   // const events = data._embedded
-//   // console.log(events);
-//   return data;
-// }
-async function getEvents() {
-    let url = `https://app.ticketmaster.com/discovery/v2/events.json?size=12&page=${page}&apikey=${APIKey}`;
-    if (currentSearch) url += `&keyword=${encodeURIComponent(currentSearch)}`;
-    if (currentCountryCode) url += `&countryCode=${currentCountryCode}`;
-    try {
-        const res = await fetch(url);
-        const data = await res.json();
-        return data;
-    } catch (error) {
-        console.error("\u041F\u043E\u043C\u0438\u043B\u043A\u0430 \u043F\u0456\u0434 \u0447\u0430\u0441 \u0437\u0430\u0432\u0430\u043D\u0442\u0430\u0436\u0435\u043D\u043D\u044F \u0434\u0430\u043D\u0438\u0445:", error);
-    }
-}
-async function renderCards() {
-    const data = await getEvents();
-    const events = data?._embedded?.events;
-    if (!events || events.length === 0) {
-        if (page === 0) containerEl.innerHTML = `<p class="no-results">\u{41F}\u{43E}\u{434}\u{456}\u{439} \u{43D}\u{435} \u{437}\u{43D}\u{430}\u{439}\u{434}\u{435}\u{43D}\u{43E}</p>`;
-        return;
-    }
-    const frame = `<svg width="153" height="143" viewBox="0 0 153 143" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M50 0.5H152.5V93C152.5 120.338 130.338 142.5 103 142.5H0.5V50C0.5 22.6619 22.6619 0.5 50 0.5Z" stroke="#DC56C5" stroke-opacity="0.3"/>
-</svg>`;
-    const placeIcon = `<svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M3.5 0C1.57011 0 0 1.55933 0 3.47595C0 5.88495 3.50344 10 3.50344 10C3.50344 10 7 5.76648 7 3.47595C7 1.55933 5.42995 0 3.5 0ZM4.55602 4.49371C4.26484 4.78284 3.88245 4.92743 3.5 4.92743C3.11761 4.92743 2.7351 4.78284 2.44404 4.49371C1.86173 3.91547 1.86173 2.97455 2.44404 2.39624C2.72601 2.11609 3.10108 1.96179 3.5 1.96179C3.89892 1.96179 4.27393 2.11615 4.55602 2.39624C5.13833 2.97455 5.13833 3.91547 4.55602 4.49371Z" fill="white"/>
-</svg>
-`;
-    const itemsMarkup = events.map((elem)=>{
-        const imageUrl = elem.images?.[0]?.url || "";
-        const date = elem.dates?.start?.localDate || "\u0414\u0430\u0442\u0430 \u043D\u0435\u0432\u0456\u0434\u043E\u043C\u0430";
-        const venue = elem._embedded?.venues?.[0]?.name || "\u041B\u043E\u043A\u0430\u0446\u0456\u044F \u043D\u0435\u0432\u0456\u0434\u043E\u043C\u0430";
-        return `<li class="card-photo" id="${elem.id}">
-        <div class="icon-decor">${frame}</div>
-            <img src="${imageUrl}" alt="${elem.name}" class="card-img">
-            <h5>${elem.name}</h5>
-            <h6>${date}</h6>
-            <p>${placeIcon}${venue}</p>
-        </li>`;
-    }).join("");
-    containerEl.insertAdjacentHTML("beforeend", itemsMarkup);
-}
-const observer = new IntersectionObserver((entries)=>{
-    entries.forEach(async (entry)=>{
-        if (entry.isIntersecting) {
-            await renderCards();
-            page += 1;
-        }
-    });
-}, {
-    rootMargin: "200px"
-});
-observer.observe(observerEl); // const soundEl = document.querySelector("#hoverSound");
- // soundEl.volume = 0.1;
- // // containerEl.addEventListener("mouseover", (e) => {
- // //     const card = e.target.closest("li");
- // //     if (card && containerEl.contains(card)) {
- // //         soundEl.currentTime = 0;
- // //         soundEl.play();
- // //     }
- // // });
- // let canPlay = true;
- // containerEl.addEventListener("mouseover", (e) => {
- //     const card = e.target.closest("li");
- //     if (!card || !containerEl.contains(card)) return;
- //     if (!canPlay) return;
- //     canPlay = false;
- //     soundEl.currentTime = 0;
- //     soundEl.play();
- //     setTimeout(() => {
- //         canPlay = true;
- //     }, 200); // задержка в миллисекундах
- // });
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"jnFvT":[function(require,module,exports,__globalThis) {
-exports.interopDefault = function(a) {
-    return a && a.__esModule ? a : {
-        default: a
-    };
-};
-exports.defineInteropFlag = function(a) {
-    Object.defineProperty(a, '__esModule', {
-        value: true
-    });
-};
-exports.exportAll = function(source, dest) {
-    Object.keys(source).forEach(function(key) {
-        if (key === 'default' || key === '__esModule' || Object.prototype.hasOwnProperty.call(dest, key)) return;
-        Object.defineProperty(dest, key, {
-            enumerable: true,
-            get: function() {
-                return source[key];
-            }
-        });
-    });
-    return dest;
-};
-exports.export = function(dest, destName, get) {
-    Object.defineProperty(dest, destName, {
-        enumerable: true,
-        get: get
-    });
-};
-
-},{}],"6579x":[function(require,module,exports,__globalThis) {
+},{"canvas-confetti":"6579x","./events":"aKbDR","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"6579x":[function(require,module,exports,__globalThis) {
 // canvas-confetti v1.9.4 built on 2025-10-25T05:14:56.640Z
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
@@ -1680,6 +1520,166 @@ var module = {};
 exports.default = module.exports;
 var create = module.exports.create;
 
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"jnFvT":[function(require,module,exports,__globalThis) {
+exports.interopDefault = function(a) {
+    return a && a.__esModule ? a : {
+        default: a
+    };
+};
+exports.defineInteropFlag = function(a) {
+    Object.defineProperty(a, '__esModule', {
+        value: true
+    });
+};
+exports.exportAll = function(source, dest) {
+    Object.keys(source).forEach(function(key) {
+        if (key === 'default' || key === '__esModule' || Object.prototype.hasOwnProperty.call(dest, key)) return;
+        Object.defineProperty(dest, key, {
+            enumerable: true,
+            get: function() {
+                return source[key];
+            }
+        });
+    });
+    return dest;
+};
+exports.export = function(dest, destName, get) {
+    Object.defineProperty(dest, destName, {
+        enumerable: true,
+        get: get
+    });
+};
+
+},{}],"aKbDR":[function(require,module,exports,__globalThis) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "containerEl", ()=>containerEl);
+parcelHelpers.export(exports, "APIKey", ()=>APIKey);
+// fetch(`https://app.ticketmaster.com/discovery/v2/events.json?apikey=${APIKey}`).then((res) => res.json())
+// .then((res) => console.log(res._embedded)
+// )
+parcelHelpers.export(exports, "setFilters", ()=>setFilters);
+// export async function renderCards() {
+//   const data = await getEvents();
+//   console.log(data);
+//   const events = data._embedded.events;
+//   console.log(events);
+//   const frame = `<svg width="153" height="143" viewBox="0 0 153 143" fill="none" xmlns="http://www.w3.org/2000/svg">
+// <path d="M50 0.5H152.5V93C152.5 120.338 130.338 142.5 103 142.5H0.5V50C0.5 22.6619 22.6619 0.5 50 0.5Z" stroke="#DC56C5" stroke-opacity="0.3"/>
+// </svg>`;
+//   {
+//     /* <img src="./images/frame.svg" alt="icon" class="icon-decor"> */
+//   }
+//   const item = events
+//     .map((elem) => {
+//       return `<li class="card-photo" id="${elem.id}">
+//         <div class="icon-decor">${frame}</div>
+//             <img src="${elem.images[0].url}" alt="#" class="card-img">
+//             <h5>${elem.name}</h5>
+//             <h6>${elem.dates.start.localDate}</h6>
+//             <p>${elem._embedded.venues[0].name}</p>
+//         </li>`;
+//     })
+//     .join("");
+//   containerEl.insertAdjacentHTML("beforeend", item);
+// }
+parcelHelpers.export(exports, "renderCards", ()=>renderCards);
+parcelHelpers.export(exports, "observer", ()=>observer);
+const containerEl = document.querySelector(".cards-container");
+const observerEl = document.querySelector(".observer");
+const APIKey = "qQY07Zm0RD8YKy3gsorYQLo9A9b0GEnX";
+let page = 0;
+let currentSearch = "";
+let currentCountryCode = "";
+let search = "";
+function setFilters(countryCode = "", keyword = "") {
+    currentCountryCode = countryCode;
+    currentSearch = keyword;
+    page = 0;
+    containerEl.innerHTML = "";
+}
+// async function getEvents(filter) {
+//   const res = await fetch(
+//     `https://app.ticketmaster.com/discovery/v2/events.json?keyword=${search}&size=12&page=${page}&apikey=${APIKey}`,
+//   );
+//   const data = await res.json();
+//   // const events = data._embedded
+//   // const events = data._embedded
+//   // console.log(events);
+//   return data;
+// }
+async function getEvents() {
+    let url = `https://app.ticketmaster.com/discovery/v2/events.json?size=12&page=${page}&apikey=${APIKey}`;
+    if (currentSearch) url += `&keyword=${encodeURIComponent(currentSearch)}`;
+    if (currentCountryCode) url += `&countryCode=${currentCountryCode}`;
+    try {
+        const res = await fetch(url);
+        const data = await res.json();
+        return data;
+    } catch (error) {
+        console.error("\u041F\u043E\u043C\u0438\u043B\u043A\u0430 \u043F\u0456\u0434 \u0447\u0430\u0441 \u0437\u0430\u0432\u0430\u043D\u0442\u0430\u0436\u0435\u043D\u043D\u044F \u0434\u0430\u043D\u0438\u0445:", error);
+    }
+}
+async function renderCards() {
+    const data = await getEvents();
+    const events = data?._embedded?.events;
+    if (!events || events.length === 0) {
+        if (page === 0) containerEl.innerHTML = `<p class="no-results">\u{41F}\u{43E}\u{434}\u{456}\u{439} \u{43D}\u{435} \u{437}\u{43D}\u{430}\u{439}\u{434}\u{435}\u{43D}\u{43E}</p>`;
+        return;
+    }
+    const frame = `<svg width="153" height="143" viewBox="0 0 153 143" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M50 0.5H152.5V93C152.5 120.338 130.338 142.5 103 142.5H0.5V50C0.5 22.6619 22.6619 0.5 50 0.5Z" stroke="#DC56C5" stroke-opacity="0.3"/>
+</svg>`;
+    const placeIcon = `<svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M3.5 0C1.57011 0 0 1.55933 0 3.47595C0 5.88495 3.50344 10 3.50344 10C3.50344 10 7 5.76648 7 3.47595C7 1.55933 5.42995 0 3.5 0ZM4.55602 4.49371C4.26484 4.78284 3.88245 4.92743 3.5 4.92743C3.11761 4.92743 2.7351 4.78284 2.44404 4.49371C1.86173 3.91547 1.86173 2.97455 2.44404 2.39624C2.72601 2.11609 3.10108 1.96179 3.5 1.96179C3.89892 1.96179 4.27393 2.11615 4.55602 2.39624C5.13833 2.97455 5.13833 3.91547 4.55602 4.49371Z" fill="white"/>
+</svg>
+`;
+    const itemsMarkup = events.map((elem)=>{
+        const imageUrl = elem.images?.[0]?.url || "";
+        const date = elem.dates?.start?.localDate || "\u0414\u0430\u0442\u0430 \u043D\u0435\u0432\u0456\u0434\u043E\u043C\u0430";
+        const venue = elem._embedded?.venues?.[0]?.name || "\u041B\u043E\u043A\u0430\u0446\u0456\u044F \u043D\u0435\u0432\u0456\u0434\u043E\u043C\u0430";
+        return `<li class="card-photo" id="${elem.id}">
+        <div class="icon-decor">${frame}</div>
+            <img src="${imageUrl}" alt="${elem.name}" class="card-img">
+            <h5>${elem.name}</h5>
+            <h6>${date}</h6>
+            <p>${placeIcon}${venue}</p>
+        </li>`;
+    }).join("");
+    containerEl.insertAdjacentHTML("beforeend", itemsMarkup);
+}
+const observer = new IntersectionObserver((entries)=>{
+    entries.forEach(async (entry)=>{
+        if (entry.isIntersecting) {
+            await renderCards();
+            page += 1;
+        }
+    });
+}, {
+    rootMargin: "200px"
+});
+observer.observe(observerEl); // const soundEl = document.querySelector("#hoverSound");
+ // soundEl.volume = 0.1;
+ // // containerEl.addEventListener("mouseover", (e) => {
+ // //     const card = e.target.closest("li");
+ // //     if (card && containerEl.contains(card)) {
+ // //         soundEl.currentTime = 0;
+ // //         soundEl.play();
+ // //     }
+ // // });
+ // let canPlay = true;
+ // containerEl.addEventListener("mouseover", (e) => {
+ //     const card = e.target.closest("li");
+ //     if (!card || !containerEl.contains(card)) return;
+ //     if (!canPlay) return;
+ //     canPlay = false;
+ //     soundEl.currentTime = 0;
+ //     soundEl.play();
+ //     setTimeout(() => {
+ //         canPlay = true;
+ //     }, 200); // задержка в миллисекундах
+ // });
+
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"jJ31c":[function(require,module,exports,__globalThis) {
 var _events = require("./events");
 var _basiclightbox = require("basiclightbox");
@@ -1742,14 +1742,14 @@ async function getEventById(id) {
                 </li>
                 <li>
                     <h6>WHO</h6>
-                    <p>${event.promoter.name}</p>
+                    <p>${event.promoter?.name || "\u041D\u0435\u0432\u0456\u0434\u043E\u043C\u0438\u0439 \u043E\u0440\u0433\u0430\u043D\u0456\u0437\u0430\u0442\u043E\u0440"}</p>
                 </li>
                 <li>
                     <h6>PRICES</h6>
                     <p>${icon}#</p>
-                    <a href="#">BUY TICKETS</a>
+                    <a href="${event.url}">BUY TICKETS</a>
                     <p>${icon}#</p>
-                    <a href="#">BUY TICKETS</a>
+                    <a href="${event.url}">BUY TICKETS</a>
                 </li>
             </ul>
         </div>

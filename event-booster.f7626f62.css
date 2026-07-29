@@ -291,12 +291,11 @@ body {
 }
 
 .cards-container {
-  z-index: 1;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: center;
   gap: 1vw;
+  width: fit-content;
   display: flex;
-  position: relative;
 }
 
 .card-photo {
