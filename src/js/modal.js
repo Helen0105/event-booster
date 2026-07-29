@@ -71,14 +71,14 @@ containerEl.addEventListener("click", async (e) => {
                 </li>
                 <li>
                     <h6>WHO</h6>
-                    <p>${event.promoter.name}</p>
+                    <p>${event.promoter?.name || "Невідомий організатор"}</p>
                 </li>
                 <li>
                     <h6>PRICES</h6>
                     <p>${icon}#</p>
-                    <a href="#">BUY TICKETS</a>
+                    <a href="${event.url}">BUY TICKETS</a>
                     <p>${icon}#</p>
-                    <a href="#">BUY TICKETS</a>
+                    <a href="${event.url}">BUY TICKETS</a>
                 </li>
             </ul>
         </div>
