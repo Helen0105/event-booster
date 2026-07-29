@@ -393,9 +393,16 @@ body {
   height: fit-content;
   padding: 62px 3%;
   display: flex;
-  position: relative;
   top: 201px;
   overflow: hidden;
+}
+
+.modal-close-img {
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  top: 30px;
+  right: 30px;
 }
 
 .basicLightbox {
@@ -465,9 +472,17 @@ body {
   border-radius: 5px;
   width: 27%;
   height: fit-content;
+  min-height: 40px;
 }
 
 @media (width <= 768px) {
+  .modal-close-img {
+    width: 17px;
+    height: 17px;
+    top: 25px;
+    right: 25px;
+  }
+
   .modal-window button {
     width: 27%;
   }
@@ -499,6 +514,12 @@ body {
 }
 
 @media (width <= 520px) {
+  .modal-info li {
+    text-align: center;
+    align-items: center;
+    display: flex;
+  }
+
   .modal-window button {
     width: 80%;
   }
