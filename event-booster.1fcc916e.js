@@ -1728,17 +1728,17 @@ async function getEventById(id) {
             <ul>
                 <li>
                     <h6>INFO</h6>
-                    <p>${event.name}</p>
+                    <p>${event.name || "\u041D\u0435\u0432\u0456\u0434\u043E\u043C\u0435"}</p>
                 </li>
                 <li>
                     <h6>WHEN</h6>
-                    <p>${event.dates.start.localDate}</p>
-                    <p>${event.dates.start.localTime}</p>
+                    <p>${event.dates.start.localDate || "\u041D\u0435\u0432\u0456\u0434\u043E\u043C\u0435"}</p>
+                    <p>${event.dates.start.localTime || "\u041D\u0435\u0432\u0456\u0434\u043E\u043C\u0435"}</p>
                 </li>
                 <li>
                     <h6>WHERE</h6>
-                    <p>${event._embedded.venues[0].name}</p>
-                    <p>${event._embedded.venues[0].city[0]}</p>
+                    <p>${event._embedded.venues[0].name || "\u041D\u0435\u0432\u0456\u0434\u043E\u043C\u0435"}</p>
+                    <p>${event._embedded.venues[0].city[0] || "\u041D\u0435\u0432\u0456\u0434\u043E\u043C\u0435"}</p>
                 </li>
                 <li>
                     <h6>WHO</h6>

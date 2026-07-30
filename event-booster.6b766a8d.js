@@ -34,17 +34,17 @@ var e={};!function e(t,n,a,o){var r,i,l,s,c,d,h,u,f,m,p,g=!!(t.Worker&&t.Blob&&t
             <ul>
                 <li>
                     <h6>INFO</h6>
-                    <p>${a.name}</p>
+                    <p>${a.name||"Невідоме"}</p>
                 </li>
                 <li>
                     <h6>WHEN</h6>
-                    <p>${a.dates.start.localDate}</p>
-                    <p>${a.dates.start.localTime}</p>
+                    <p>${a.dates.start.localDate||"Невідоме"}</p>
+                    <p>${a.dates.start.localTime||"Невідоме"}</p>
                 </li>
                 <li>
                     <h6>WHERE</h6>
-                    <p>${a._embedded.venues[0].name}</p>
-                    <p>${a._embedded.venues[0].city[0]}</p>
+                    <p>${a._embedded.venues[0].name||"Невідоме"}</p>
+                    <p>${a._embedded.venues[0].city[0]||"Невідоме"}</p>
                 </li>
                 <li>
                     <h6>WHO</h6>
@@ -63,4 +63,4 @@ var e={};!function e(t,n,a,o){var r,i,l,s,c,d,h,u,f,m,p,g=!!(t.Worker&&t.Blob&&t
     <button>MORE FROM THIS AUTHOR</button>
     </div>
 `);o.show(),document.querySelector(".modal-close-img").addEventListener("click",e=>{o.close()}),window.addEventListener("keydown",e=>{"Escape"===e.key&&o.close()})}}),console.log("Event Booster");
-//# sourceMappingURL=event-booster.386d354f.js.map
+//# sourceMappingURL=event-booster.6b766a8d.js.map

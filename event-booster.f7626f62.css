@@ -396,6 +396,10 @@ body {
   overflow: hidden;
 }
 
+.modal-info {
+  max-width: 34%;
+}
+
 .modal-close-img {
   width: 25px;
   height: 25px;
