@@ -57,17 +57,17 @@ containerEl.addEventListener("click", async (e) => {
             <ul>
                 <li>
                     <h6>INFO</h6>
-                    <p>${event.name}</p>
+                    <p>${event.name || "Невідоме"}</p>
                 </li>
                 <li>
                     <h6>WHEN</h6>
-                    <p>${event.dates.start.localDate}</p>
-                    <p>${event.dates.start.localTime}</p>
+                    <p>${event.dates.start.localDate || "Невідоме"}</p>
+                    <p>${event.dates.start.localTime || "Невідоме"}</p>
                 </li>
                 <li>
                     <h6>WHERE</h6>
-                    <p>${event._embedded.venues[0].name}</p>
-                    <p>${event._embedded.venues[0].city[0]}</p>
+                    <p>${event._embedded.venues[0].name || "Невідоме"}</p>
+                    <p>${event._embedded.venues[0].city[0] || "Невідоме"}</p>
                 </li>
                 <li>
                     <h6>WHO</h6>
